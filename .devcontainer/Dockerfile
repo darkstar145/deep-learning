@@ -12,7 +12,11 @@ RUN mkdir /workspace
 WORKDIR /workspace
 
 # Install Python dependencies from requirements.txt if it exists
-COPY .devcontainer/environment.yml.temp environment.yml* /workspace/
+COPY .devcontainer/environment.yml /workspace/
+RUN conda update conda
+RUN conda update anaconda
+RUN conda update python
+RUN conda update --all
 RUN if [ -f "environment.yml" ]; then conda env update base -f environment.yml && rm environment.yml*; fi
 
 # Clean up
